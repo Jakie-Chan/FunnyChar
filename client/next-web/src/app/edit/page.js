@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  Button,
-  Input,
-  Textarea,
-  Radio,
-  RadioGroup,
-  Tooltip,
-  Link,
-} from '@nextui-org/react';
+import { Button, Input, Textarea, Radio, RadioGroup, Tooltip, Link } from '@nextui-org/react';
 import { MdInfoOutline, MdArrowBack } from 'react-icons/md';
 import NextLink from 'next/link';
 import Header from '../_components/Header';
@@ -38,9 +30,7 @@ export default function EditCharacter() {
 
   useEffect(() => {
     const characterString = searchParams.get('character');
-    characterRef.current = JSON.parse(
-      lz.decompressFromEncodedURIComponent(characterString)
-    );
+    characterRef.current = JSON.parse(lz.decompressFromEncodedURIComponent(characterString));
     getCharacterForEdit(characterRef.current);
   }, []);
 
@@ -63,28 +53,28 @@ export default function EditCharacter() {
   return (
     <>
       <Header />
-      <form className="py-5 px-4 flex flex-col justify-center gap-5 md:w-unit-9xl md:mx-auto lg:w-[892px] lg:gap-8">
+      <form className='py-5 px-4 flex flex-col justify-center gap-5 md:w-unit-9xl md:mx-auto lg:w-[892px] lg:gap-8'>
         <p>
           <Link
-            color="foreground"
+            color='foreground'
             as={NextLink}
             href={{
               pathname: '/',
               query: { tab: 'myCharacters' },
             }}
           >
-            <MdArrowBack className="mr-2" />
+            <MdArrowBack className='mr-2' />
             Back
           </Link>
         </p>
-        <h1 className="text-center text-2xl font-medium">{formData.name}</h1>
+        <h1 className='text-center text-2xl font-medium'>{formData.name}</h1>
         <AvatarUploader />
         <div>
           <Input
-            type="text"
-            label="Name"
-            labelPlacement="outside"
-            placeholder="Name your character"
+            type='text'
+            label='Name'
+            labelPlacement='outside'
+            placeholder='Name your character'
             value={formData.name}
             onValueChange={(value) =>
               setFormData({
@@ -104,9 +94,9 @@ export default function EditCharacter() {
         </div>
         <div>
           <Textarea
-            label="Background"
-            labelPlacement="outside"
-            placeholder="Provide some background information about your character"
+            label='Background'
+            labelPlacement='outside'
+            placeholder='Provide some background information about your character'
             classNames={{
               label: 'text-lg',
               inputWrapper: [
@@ -120,13 +110,13 @@ export default function EditCharacter() {
             onValueChange={setBackgroundText}
           />
         </div>
-        <div className="flex flex-col gap-3">
-          <h4 className="font-medium text-lg">System Prompt(required)</h4>
+        <div className='flex flex-col gap-3'>
+          <h4 className='font-medium text-lg'>System Prompt(required)</h4>
           {/* <p className="text-small">
             You can auto-generate the prompt based on character name and
             background
           </p> */}
-          <div className="flex flex-col w-fit">
+          <div className='flex flex-col w-fit'>
             {/* <Button
               onPress={autoGenerate}
               isLoading={formData.system_prompt === 'Generating...'}
@@ -134,14 +124,12 @@ export default function EditCharacter() {
             >
               Auto generate
             </Button> */}
-            <span className="text-tiny text-warning">
-              * It may take ~1 minute
-            </span>
+            <span className='text-tiny text-warning'>* It may take ~1 minute</span>
           </div>
           <Textarea
-            label=""
-            labelPlacement="outside"
-            placeholder="Write your own prompt"
+            label=''
+            labelPlacement='outside'
+            placeholder='Write your own prompt'
             classNames={{
               label: 'text-lg',
               inputWrapper: [
@@ -161,9 +149,9 @@ export default function EditCharacter() {
         </div>
         <div>
           <Textarea
-            label="User Prompt"
-            labelPlacement="outside"
-            placeholder=""
+            label='User Prompt'
+            labelPlacement='outside'
+            placeholder=''
             classNames={{
               label: 'text-lg',
               inputWrapper: [
@@ -182,54 +170,44 @@ export default function EditCharacter() {
           />
         </div>
         <TTSVoice />
-        <div className="flex flex-col gap-1">
-          <h4 className="font-medium flex flex-row gap-1 items-center">
+        <div className='flex flex-col gap-1'>
+          <h4 className='font-medium flex flex-row gap-1 items-center'>
             Visibility
             <Tooltip
               content={
-                <div className="w-fit h-fit text-tiny py-1 px-1">
-                  If set to public, the character will be visible to everyone
-                  after review.
+                <div className='w-fit h-fit text-tiny py-1 px-1'>
+                  If set to public, the character will be visible to everyone after review.
                 </div>
               }
             >
               <Button
                 isIconOnly
-                size="sm"
-                variant="light"
-                className="p-0 min-w-unit-5 w-5 min-h-unit-5 h-5"
+                size='sm'
+                variant='light'
+                className='p-0 min-w-unit-5 w-5 min-h-unit-5 h-5'
               >
-                <MdInfoOutline size="1.5em" />
+                <MdInfoOutline size='1.5em' />
               </Button>
             </Tooltip>
           </h4>
           <RadioGroup
-            orientation="horizontal"
+            orientation='horizontal'
             value={formData.visibility}
             onValueChange={(value) => setFormData({ visibility: value })}
           >
-            <Radio value="public">Public</Radio>
-            <Radio value="private">Private</Radio>
+            <Radio value='public'>Public</Radio>
+            <Radio value='private'>Private</Radio>
           </RadioGroup>
         </div>
-        <div className="flex flex-row gap-5">
-          <Button
-            onPress={handleDelete}
-            color="danger"
-            className="grow"
-          >
+        <div className='flex flex-row gap-5'>
+          <Button onPress={handleDelete} color='danger' className='grow'>
             Delete
           </Button>
-          <Button
-            onPress={handleEdit}
-            className="bg-real-contrastBlue grow"
-          >
+          <Button onPress={handleEdit} className='bg-real-contrastBlue grow'>
             Confirm
           </Button>
         </div>
-        <p className="text-tiny text-warning">
-          *It may take 30 seconds to see the changes.
-        </p>
+        <p className='text-tiny text-warning'>*It may take 30 seconds to see the changes.</p>
       </form>
       <Footer />
     </>
